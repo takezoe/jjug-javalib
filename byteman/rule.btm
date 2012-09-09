@@ -1,0 +1,8 @@
+RULE Sample Rule
+CLASS jp.sf.amateras.javalib.byteman.BytemanSample
+METHOD hello
+IF TRUE
+AT ENTRY
+DO 
+  traceln($1)
+ENDRULE
