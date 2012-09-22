@@ -5,18 +5,18 @@ import java.sql.*;
 import java.util.List;
 
 /**
- * Clione-SQL‚ÌƒTƒ“ƒvƒ‹
- * 
+ * Clione-SQLã®ã‚µãƒ³ãƒ—ãƒ«
+ *
  * @author Naoki Takezoe
  */
 public class ClioneSQLSample {
 	public static void main(String[] args)  throws SQLException {
 		Connection conn = DriverManager.getConnection("jdbc:hsqldb:mem:.", "sa", "");
 		prepare(conn);
-		
+
         List<Book> books = sqlManager(conn).useFile("jp/sf/amateras/javalib/clionesql/ClioneSQLSample.sql")
-                .findAll(Book.class, params("publisher", "ãÄ‰jĞ").$("price", 3500) );
-        
+                .findAll(Book.class, params("publisher", "ç¿”æ³³ç¤¾").$("price", 3500) );
+
         for(Book book: books){
         	System.out.println("id: " + book.id);
         	System.out.println("title: " + book.title);
@@ -24,32 +24,32 @@ public class ClioneSQLSample {
         	System.out.println("price: " + book.price);
         	System.out.println("--");
         }
-        
+
         conn.close();
 	}
-	
+
 	/**
-	 * ƒTƒ“ƒvƒ‹‚ÌÀs‚É•K—v‚Èƒe[ƒuƒ‹‚ÆŠŠúƒf[ƒ^‚ğì¬
+	 * ã‚µãƒ³ãƒ—ãƒ«ã®å®Ÿè¡Œã«å¿…è¦ãªãƒ†ãƒ¼ãƒ–ãƒ«ã¨æ‰€æœŸãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆ
 	 */
 	private static void prepare(Connection conn) throws SQLException {
 		Statement stmt = conn.createStatement();
-		
+
 		stmt.executeUpdate("CREATE TABLE BOOKS(" +
 				"ID INTEGER PRIMARY KEY, " +
 				"TITLE VARCHAR(200) NOT NULL, " +
 				"PUBLISHER VARCHAR(200) NOT NULL, " +
 				"PRICE INTEGER NOT NULL)");
-		
-		stmt.executeUpdate("INSERT INTO BOOKS VALUES (1, 'Eclipseƒvƒ‰ƒOƒCƒ“ŠJ”­“O’êU—ª', 'ƒ}ƒCƒiƒr', 4095)");
-		stmt.executeUpdate("INSERT INTO BOOKS VALUES (2, 'Seasar2“O’ê“ü–å', 'ãÄ‰jĞ', 3990)");
-		stmt.executeUpdate("INSERT INTO BOOKS VALUES (3, 'Œ»ê‚Åg‚¦‚éJavaƒ‰ƒCƒuƒ‰ƒŠ', 'ãÄ‰jĞ', 3780)");
-		stmt.executeUpdate("INSERT INTO BOOKS VALUES (4, '‹tˆø‚«ScalaƒŒƒVƒs', 'ãÄ‰jĞ', 3360)");
-		
+
+		stmt.executeUpdate("INSERT INTO BOOKS VALUES (1, 'Eclipseãƒ—ãƒ©ã‚°ã‚¤ãƒ³é–‹ç™ºå¾¹åº•æ”»ç•¥', 'ãƒã‚¤ãƒŠãƒ“', 4095)");
+		stmt.executeUpdate("INSERT INTO BOOKS VALUES (2, 'Seasar2å¾¹åº•å…¥é–€', 'ç¿”æ³³ç¤¾', 3990)");
+		stmt.executeUpdate("INSERT INTO BOOKS VALUES (3, 'ç¾å ´ã§ä½¿ãˆã‚‹Javaãƒ©ã‚¤ãƒ–ãƒ©ãƒª', 'ç¿”æ³³ç¤¾', 3780)");
+		stmt.executeUpdate("INSERT INTO BOOKS VALUES (4, 'é€†å¼•ãScalaãƒ¬ã‚·ãƒ”', 'ç¿”æ³³ç¤¾', 3360)");
+
 		stmt.close();
 	}
-	
+
 	/**
-	 * ŒŸõŒ‹‰Ê‚ğƒ}ƒbƒsƒ“ƒO‚·‚éƒNƒ‰ƒX
+	 * æ¤œç´¢çµæœã‚’ãƒãƒƒãƒ”ãƒ³ã‚°ã™ã‚‹ã‚¯ãƒ©ã‚¹
 	 */
 	public static class Book {
 		public int id;
